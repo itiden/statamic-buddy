@@ -1,5 +1,11 @@
 {
     "name": "itiden/statamic-buddy",
+    "description": "Statamic addon to deploy frontend with Buddy",
+    "keywords": [
+        "laravel",
+        "statamic",
+        "buddy"
+    ],
     "require": {
         "php": "^8.0",
         "statamic/cms": "^3.1"
