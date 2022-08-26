@@ -1,0 +1,23 @@
+{
+    "name": "itiden/statamic-buddy",
+    "require": {
+        "php": "^8.0",
+        "statamic/cms": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Itiden\\StatamicBuddy\\": "src"
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Buddy",
+            "description": "Addon to deploy frontend with Buddy"
+        },
+        "laravel": {
+            "providers": [
+                "Itiden\\StatamicBuddy\\ServiceProvider"
+            ]
+        }
+    }
+}
