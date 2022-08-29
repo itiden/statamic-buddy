@@ -19,18 +19,18 @@ class DeployApiController extends Controller
   private function deploy(string $comment)
   {
     $token = config('statamic-buddy.token');
+    $workspace = config('statamic-buddy.workspace');
     $project = config('statamic-buddy.project');
     $pipelineId = config('statamic-buddy.pipeline');
 
     $response = Http::withToken($token)
-      ->post("https://api.buddy.works/workspaces/itiden/projects/$project/pipelines/$pipelineId/executions", [
+      ->post("https://api.buddy.works/workspaces/$workspace/projects/$project/pipelines/$pipelineId/executions", [
           "to_revision" => [
               "revision" => "HEAD"
           ],
           "comment" => $comment
       ]);
 
-    Cache::forget('buddy-deploy');
     Cache::forget('buddy-deploy-api');
 
     return $response;

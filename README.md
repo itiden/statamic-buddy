@@ -12,4 +12,10 @@ composer require itiden/statamic-buddy
 
 ## How to Use
 
-Here's where you can explain how to use this wonderful addon.
+You need to add the following variables to your `.env` file
+```
+BUDDY_API_TOKEN=your-personal-access-token
+BUDDY_WORKSPACE="My workspace"
+BUDDY_PROJECT="My project"
+BUDDY_PIPELINE_ID=123456
+```
