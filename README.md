@@ -14,8 +14,8 @@ composer require itiden/statamic-buddy
 
 You need to add the following variables to your `.env` file
 ```
-BUDDY_API_TOKEN=your-personal-access-token
-BUDDY_WORKSPACE="My workspace"
-BUDDY_PROJECT="My project"
-BUDDY_PIPELINE_ID=123456
+STATAMIC_BUDDY_API_TOKEN=your-personal-access-token
+STATAMIC_BUDDY_WORKSPACE="My workspace"
+STATAMIC_BUDDY_PROJECT="My project"
+STATAMIC_BUDDY_PIPELINE_ID=123456
 ```
