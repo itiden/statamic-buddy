@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div class="flex items-center justify-between mb-3">
-      <h1>Buddy</h1>
-
-      <buddy-deploy :route="deployRoute" @onDeployed="onDeployed" />
-    </div>
+    <header class="mb-6">
+      <div class="flex items-center">
+        <h1 class="flex-1">Deploy with Buddy</h1>
+        <div class="btn-group mr-4">
+          <buddy-deploy :route="deployRoute" @onDeployed="onDeployed" />
+        </div>
+      </div>
+    </header>
 
     <div v-if="!hasLoaded" class="flex justify-center">
       <loading-graphic :inline="true" :size="22" />
@@ -21,11 +24,7 @@
           </div>
 
           <ol>
-            <li
-              class="flex items-center py-2 px-4 border-b"
-              v-for="item in items"
-              :key="item.id"
-            >
+            <li class="flex items-center py-2 px-4 border-b" v-for="item in items" :key="item.id">
               <div class="text-grey-80">
                 <b class="mr-2 text-grey-100">Run #{{ item.id }}</b>
                 {{ item.comment }}
@@ -33,34 +32,16 @@
 
               <div class="ml-auto flex gap-2 text-grey-70 text-">
                 <time :datetime="item.date">{{ item.time }}</time>
-                <span
-                  class="flex items-center justify-center w-6 h-6 rounded-full"
-                >
-                  <span
-                    class="flex items-center justify-center w-6 h-6 rounded-full text-white"
-                    style="padding: 6px"
+                <span class="flex items-center justify-center w-6 h-6 rounded-full">
+                  <span class="flex items-center justify-center w-6 h-6 rounded-full text-white" style="padding: 6px"
                     :class="{
                       'bg-green': item.status === 'SUCCESSFUL',
                       'bg-yellow-dark': item.status === 'INPROGRESS',
                       'bg-red': item.status === 'FAILED',
-                    }"
-                  >
-                    <svg-icon
-                      v-if="item.status === 'SUCCESSFUL'"
-                      name="check"
-                      class="icon"
-                    ></svg-icon>
-                    <svg-icon
-                      v-if="item.status === 'FAILED'"
-                      name="close"
-                      class="icon"
-                    ></svg-icon>
-                    <loading-graphic
-                      v-if="item.status === 'INPROGRESS'"
-                      :inline="true"
-                      :size="22"
-                      text=""
-                    />
+                    }">
+                    <svg-icon v-if="item.status === 'SUCCESSFUL'" name="check" class="icon"></svg-icon>
+                    <svg-icon v-if="item.status === 'FAILED'" name="close" class="icon"></svg-icon>
+                    <loading-graphic v-if="item.status === 'INPROGRESS'" :inline="true" :size="22" text="" />
                   </span>
                 </span>
               </div>
