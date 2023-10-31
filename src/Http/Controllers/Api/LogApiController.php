@@ -39,13 +39,14 @@ class LogApiController extends Controller
   private function getExecutions(): array
   {
       return Cache::remember('buddy-deploy-api', 60, function () {
+          $host = config('statamic-buddy.host');
           $token = config('statamic-buddy.token');
           $workspace = config('statamic-buddy.workspace');
           $project = config('statamic-buddy.project');
           $pipelineId = config('statamic-buddy.pipeline');
 
           $response = Http::withToken($token)
-              ->get("https://api.buddy.works/workspaces/$workspace/projects/$project/pipelines/$pipelineId/executions");
+              ->get("https://$host/workspaces/$workspace/projects/$project/pipelines/$pipelineId/executions");
 
           if ($response->status() !== 200) {
               return [];
