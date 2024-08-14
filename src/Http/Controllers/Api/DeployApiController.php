@@ -3,37 +3,15 @@
 namespace Itiden\StatamicBuddy\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
+use Itiden\StatamicBuddy\Actions\DeployAction;
 use Statamic\Http\Controllers\Controller;
 
 class DeployApiController extends Controller
 {
-  public function __invoke(Request $request)
+  public function __invoke(Request $request, DeployAction $deployAction)
   {
-    $response = $this->deploy($request->get('comment', ''));
+    $response = $deployAction->handle($request->get('comment', ''));
 
     return response()->json($response->json());
-  }
-
-  private function deploy(string $comment)
-  {
-    $host = config('statamic-buddy.host');
-    $token = config('statamic-buddy.token');
-    $workspace = config('statamic-buddy.workspace');
-    $project = config('statamic-buddy.project');
-    $pipelineId = config('statamic-buddy.pipeline');
-
-    $response = Http::withToken($token)
-      ->post("https://$host/workspaces/$workspace/projects/$project/pipelines/$pipelineId/executions", [
-          "to_revision" => [
-              "revision" => "HEAD"
-          ],
-          "comment" => $comment
-      ]);
-
-    Cache::forget('buddy-deploy-api');
-
-    return $response;
   }
 }

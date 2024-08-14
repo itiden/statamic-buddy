@@ -2,6 +2,7 @@
 
 namespace Itiden\StatamicBuddy;
 
+use Itiden\StatamicBuddy\Listeners\DeployListener;
 use Statamic\Providers\AddonServiceProvider;
 use Statamic\Facades\CP\Nav;
 
@@ -13,6 +14,10 @@ class ServiceProvider extends AddonServiceProvider
 
     protected $scripts = [
         __DIR__.'/../dist/js/index.js',
+    ];
+
+    protected $subscribe = [
+        DeployListener::class
     ];
 
     public function bootAddon()
